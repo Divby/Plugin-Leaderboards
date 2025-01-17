@@ -6,6 +6,7 @@
         <% for(var i=0; i<posts.length; i++) {%>
           <li class="mb-4"> 
             <a href="/post/<%= posts[i]._id%>">
+              <p><%= posts[i].userName %></p>
               <img src="<%= posts[i].image%>" class="img-fluid w-100" alt="<%= posts[i].title%>"> 
             </a>
             <h2><%= posts[i].title %></h2>

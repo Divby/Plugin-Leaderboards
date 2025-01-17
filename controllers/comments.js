@@ -6,13 +6,13 @@ module.exports = {
 
     createComment: async (req, res) => {
         try {
-
+            console.log(req.body)
             await Comment.create({
                 comment: req.body.comment,
                 likes: 0,
+                userName: req.user.userName,
                 post: req.params.id,
-                user: req.user.id,
-                userName: req.body.userName,
+                user: req.user.id
             });
             console.log("Comment has been added!");
             res.redirect("/post/" + req.params.id,);

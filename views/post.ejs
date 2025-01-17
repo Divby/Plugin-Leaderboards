@@ -3,6 +3,7 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.title %></h2>
+      <h2><%= post.userName %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
       <div class="row justify-content-between">
         <form
@@ -30,12 +31,10 @@
     <!-- loop to display comments -->
     <ul>
       <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5"> 
-        <%= comments[i].comment %>
+        <li class="col-6 justify-content-between mt-5" data-id='<%=comments._id%>'> 
+          <%= comments[i].userName + ":" %> <%= comments[i].comment %>
         </li>
-        <li class="col-6 justify-content-between mt-5"> 
-          <%= comments[i].user %>
-          </li>
+        
       <% } %>
     </ul>
 
