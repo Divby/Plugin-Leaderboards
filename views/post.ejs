@@ -3,18 +3,21 @@
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <h2><%= post.plugin %></h2>
-      <h2><%= post.userName %></h2>
+      <ul class="list-unstyled">
+        <li>Category: <%= post.category %></li>
+        <li>Free or Paid? <%= post.freeOrPaid %></li>
+        <li>Link To Plugin: <a href="<%= post.link %>" target="_blank"><%= post.link %></a></li>
+      </ul>
       
-      <!-- <img class="img-fluid" src="<%= post.image%>" /> -->
+  
       <div class="row justify-content-between">
         <form
-          class="col-1"
+          class="col-3"
           action="/post/likePost/<%= post.id %>?_method=PUT"
-          method="POST"
-        >
-          <button class="btn btn-primary fa fa-heart" type="submit"></button>
+          method="POST">
+          <button class="btn fa fa-fire" style="color: orange;" type="submit">  <%= post.likes %></button>
         </form>
-        <h3 class="col-3">Likes: <%= post.likes %></h3>
+        <!-- <h3 class="col-3">Likes:</h3> -->
         <%if(post.user == user.id){ %>
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
@@ -24,24 +27,26 @@
           <button class="btn btn-primary fa fa-trash" type="submit"></button>
         </form>
         <%}%>
+
+        <div>
+          <p class="fst-italic">Submitted by <%= post.userName %></p>
+        </div>
       </div>
     </div>
-    <div class="col-3 mt-5">
-      <ul class="list-unstyled">
-        <li>Category: <%= post.category %></li>
-        <li>Free or Paid? <%= post.freeOrPaid %></li>
-        <li>Link To Plugin: <a href="<%= post.link %>" target="_blank"><%= post.link %></a></li>
-      </ul>
-    </div>
+
+
     <!-- loop to display comments -->
-    <ul>
+     <div class="row justify-content-between">
+      <h3>Comments</h3>
+    <ul class="list-unstyled">
       <% for(var i=0; i<comments.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5" data-id='<%=comments._id%>'> 
+        <li class="col-3 justify-content-between mt-2" data-id='<%=comments._id%>'> 
           <%= comments[i].userName + ":" %> <%= comments[i].comment %>
         </li>
         
       <% } %>
     </ul>
+  </div>
 
     <!-- form for making comments -->
     <div class="mt-5">
@@ -55,9 +60,9 @@
     </div>
 
 
-    <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
+    <div class="mt-5 d-flex justify-content-center">
+      <a class="btn btn-primary mx-2" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary mx-2" href="/feed">Return to Feed</a>
     </div>
   </div>
 </div>

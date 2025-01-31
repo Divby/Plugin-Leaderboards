@@ -66,7 +66,12 @@ module.exports = {
         }
       );
       console.log("Likes +1");
-      res.redirect(`/post/${req.params.id}`);
+      if (req.headers.referer.includes("/feed")) {
+        return res.redirect("/feed");
+      } else {
+        res.redirect(`/post/${req.params.id}`)
+      }
+      
     } catch (err) {
       console.log(err);
     }
