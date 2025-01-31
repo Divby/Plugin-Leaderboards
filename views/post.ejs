@@ -2,9 +2,10 @@
 <div class="container">
   <div class="row justify-content-center mt-5">
     <div class="col-6">
-      <h2><%= post.title %></h2>
+      <h2><%= post.plugin %></h2>
       <h2><%= post.userName %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
+      
+      <!-- <img class="img-fluid" src="<%= post.image%>" /> -->
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -26,7 +27,11 @@
       </div>
     </div>
     <div class="col-3 mt-5">
-      <p><%= post.caption %></p>
+      <ul class="list-unstyled">
+        <li>Category: <%= post.category %></li>
+        <li>Free or Paid? <%= post.freeOrPaid %></li>
+        <li>Link To Plugin: <a href="<%= post.link %>" target="_blank"><%= post.link %></a></li>
+      </ul>
     </div>
     <!-- loop to display comments -->
     <ul>
@@ -40,13 +45,12 @@
 
     <!-- form for making comments -->
     <div class="mt-5">
-      <h2>Add a comment</h2>
       <form action="/comment/createComment/<%=post._id%>" method="POST">
         <div class="mb-3">
-            <label for="comment" class="form-label">Comment</label>
+            <label for="comment" class="form-label">Share your thoughts on <%= post.plugin %></label>
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Add Comment</button>
       </form>
     </div>
 

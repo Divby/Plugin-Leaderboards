@@ -1,4 +1,4 @@
-const cloudinary = require("../middleware/cloudinary");
+// const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 
@@ -38,14 +38,14 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
-      // Upload image to cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
+     
 
       await Post.create({
-        title: req.body.title,
-        image: result.secure_url,
-        cloudinaryId: result.public_id,
-        caption: req.body.caption,
+        plugin: req.body.plugin,
+        company: req.body.company,
+        category: req.body.category,
+        freeOrPaid: req.body.freeOrPaid,
+        link: req.body.link,
         likes: 0,
         userName: req.user.userName,
         user: req.user.id,
@@ -76,7 +76,7 @@ module.exports = {
       // Find post by id
       let post = await Post.findById({ _id: req.params.id });
       // Delete image from cloudinary
-      await cloudinary.uploader.destroy(post.cloudinaryId);
+      // await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");

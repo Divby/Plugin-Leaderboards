@@ -1,19 +1,23 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  title: {
+  plugin: {
     type: String,
     required: true,
   },
-  image: {
+  company: {
     type: String,
     require: true,
   },
-  cloudinaryId: {
+  category: {
     type: String,
     require: true,
   },
-  caption: {
+  freeOrPaid: {
+    type: String,
+    required: true,
+  },
+  link: {
     type: String,
     required: true,
   },
@@ -35,4 +39,5 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
+//MongoDB Collection named here - will give lowercase pllural of name
 module.exports = mongoose.model("Post", PostSchema);

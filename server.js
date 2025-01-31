@@ -1,11 +1,17 @@
+// All of the modules needed to make the app work 
 const express = require("express");
 const app = express();
+//helps us talk to our mongodb databse
 const mongoose = require("mongoose");
 const passport = require("passport");
+//allows our users to stay logged in across sessions
 const session = require("express-session");
+//Storing our actual session in mongodb
 const MongoStore = require("connect-mongo")(session);
+//allows us to do put and delete requests with forms
 const methodOverride = require("method-override");
 const flash = require("express-flash");
+//our logger
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
