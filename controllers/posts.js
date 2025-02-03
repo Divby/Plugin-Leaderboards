@@ -11,10 +11,10 @@ module.exports = {
       console.log(err);
     }
   },
-  getFeed: async (req, res) => {
+  getHome: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("home.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
     }
@@ -66,8 +66,8 @@ module.exports = {
         }
       );
       console.log("Likes +1");
-      if (req.headers.referer.includes("/feed")) {
-        return res.redirect("/feed");
+      if (req.headers.referer.includes("/home")) {
+        return res.redirect("/home");
       } else {
         res.redirect(`/post/${req.params.id}`)
       }
