@@ -59,13 +59,31 @@ module.exports = {
   },
   likePost: async (req, res) => {
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
+      const post = await Post.findById(req.params.id);
+
+      if (post.likedBy.includes(req.user._id)) {
+
+        await Post.findByIdAndUpdate(
+          req.params.id,
+          {
+            $inc: {likes: -1},
+            $pull: {likedBy: req.user._id}
+          }
+        )
+        console.log("Upvote removed");
+       
+      } else {
+
+      await Post.findByIdAndUpdate(
+        req.params.id,
         {
-          $inc: { likes: 1 },
+          $inc: {likes: 1},
+          $push: {likedBy: req.user._id}
         }
-      );
+      )
       console.log("Likes +1");
+      
+    }
       if (req.headers.referer.includes("/home")) {
         return res.redirect("/home");
       } else {
@@ -76,6 +94,25 @@ module.exports = {
       console.log(err);
     }
   },
+  // likePost: async (req, res) => {
+  //   try {
+  //     await Post.findOneAndUpdate(
+  //       { _id: req.params.id },
+  //       {
+  //         $inc: { likes: 1 },
+  //       }
+  //     );
+  //     console.log("Likes +1");
+  //     if (req.headers.referer.includes("/home")) {
+  //       return res.redirect("/home");
+  //     } else {
+  //       res.redirect(`/post/${req.params.id}`)
+  //     }
+      
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+ 
   deletePost: async (req, res) => {
     try {
       // Find post by id
