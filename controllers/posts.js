@@ -2,6 +2,8 @@
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 
+
+
 module.exports = {
   getProfile: async (req, res) => {
     try {
@@ -15,6 +17,14 @@ module.exports = {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
       res.render("home.ejs", { posts: posts });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  getFree: async (req, res) => {
+    try {
+      const posts = await Post.find( { freeOrPaid: 'Free' }).sort({ createdAt: "desc" }).lean();
+      res.render("free.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
     }
@@ -38,7 +48,19 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
+
+      const pluginLowerCase = req.body.plugin.toLowerCase();
+     //Check if plugin has already been posted
+     const existingPost = await Post.findOne({ plugin: pluginLowerCase })
+     if (existingPost) {
+      console.log("This plugin has already been posted.");
+      
+      req.flash("errors", { msg: "This plugin has already been posted." });
+      
+      return res.redirect("/profile");
+      
      
+     }
 
       await Post.create({
         plugin: req.body.plugin,

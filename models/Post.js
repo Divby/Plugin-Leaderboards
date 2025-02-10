@@ -4,6 +4,7 @@ const PostSchema = new mongoose.Schema({
   plugin: {
     type: String,
     required: true,
+    unique: true,
   },
   company: {
     type: String,
