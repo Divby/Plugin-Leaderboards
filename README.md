@@ -1,3 +1,8 @@
+Link to site in current testing phase:
+
+https://plugin-leaderboards.onrender.com/home
+
+
 # Install
 
 `npm install`
