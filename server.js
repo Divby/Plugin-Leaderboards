@@ -10,7 +10,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 //allows us to do put and delete requests with forms
 const methodOverride = require("method-override");
-const flash = require("express-flash");
+const flash = require("connect-flash");
 //our logger
 const logger = require("morgan");
 const connectDB = require("./config/database");
@@ -48,7 +48,7 @@ app.use(
   session({
     secret: "keyboard cat",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 );
@@ -61,6 +61,13 @@ app.use(passport.session());
 
 //Use flash messages for errors, info, ect...
 app.use(flash());
+
+// Make flash messages available in all views
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
 
 
 

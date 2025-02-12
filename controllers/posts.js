@@ -52,10 +52,12 @@ module.exports = {
       const pluginLowerCase = req.body.plugin.toLowerCase();
      //Check if plugin has already been posted
      const existingPost = await Post.findOne({ plugin: pluginLowerCase })
+     console.log("Existing Post:", existingPost);
+     
      if (existingPost) {
       console.log("This plugin has already been posted.");
       
-      req.flash("errors", { msg: "This plugin has already been posted." });
+      req.flash('error_msg', 'This plugin has already been posted.');
       
       return res.redirect("/profile");
       
@@ -74,9 +76,12 @@ module.exports = {
 
       });
       console.log("Post has been added!");
+      req.flash('success_msg', 'Post created successfully.');
       res.redirect("/profile");
     } catch (err) {
-      console.log(err);
+      console.error("Error in createPost:", err); // Debugging line
+    req.flash('error_msg', `An error occurred while creating the post. Check that you fill all fields and that this plugin hasn't already been posted.`);
+    res.redirect("/profile");
     }
   },
   likePost: async (req, res) => {
