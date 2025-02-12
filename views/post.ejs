@@ -18,7 +18,9 @@
           <button class="btn fa fa-fire" style="color: orange;" type="submit">  <%= post.likes %></button>
         </form>
         <!-- <h3 class="col-3">Likes:</h3> -->
-        <%if(post.user == user.id){ %>
+
+        <!-- this code is crashing page when user not logged in -->
+        <%if(user && post.user == user.id){ %> 
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
           method="POST"
