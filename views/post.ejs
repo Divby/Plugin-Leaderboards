@@ -43,7 +43,7 @@
     <ul class="list-unstyled">
       <% comments.sort((a,b) => a.createdAt - b.createdAt)
        for(var i=0; i<comments.length; i++) {%>
-        <li class="col-3 justify-content-between mt-2" data-id='<%=comments._id%>'> 
+        <li class="justify-content-between mt-2" data-id='<%=comments._id%>'> 
           <%= comments[i].userName + ":" %> <%= comments[i].comment %>
         </li>
         
@@ -58,14 +58,14 @@
             <label for="comment" class="form-label">Share your thoughts on <%= post.plugin %></label>
             <input type="text" class="form-control" id="comment" name="comment">
         </div>
-        <button type="submit" class="btn btn-primary">Add Comment</button>
+        <button type="submit" class="btn btn-primary custom">Add Comment</button>
       </form>
     </div>
 
 
     <div class="mt-5 d-flex justify-content-center">
-      <a class="btn btn-primary mx-2" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary mx-2" href="/home">Return Home</a>
+      <a class="btn btn-primary mx-2 custom" href="/profile">Return to Profile</a>
+      <a class="btn btn-primary mx-2 custom" href="/home">Return Home</a>
     </div>
   </div>
 </div>

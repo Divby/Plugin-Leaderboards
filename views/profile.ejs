@@ -1,11 +1,11 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-6">
+<div class="container d-flex justify-content-center">
+  <div class="row col-6 mt-5">
+    <div class="">
       <div>
         <p><strong>User Name</strong>: <%= user.userName %></p>
         <p><strong>Email</strong>: <%= user.email %></p>
-        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+        <a href="/logout" class="col-3 btn btn-primary custom">Logout</a>
       </div>
 
       <div class="mt-5">
@@ -61,7 +61,7 @@
             <input type="text" class="form-control" id="link" name="link" />
           </div>
 
-          <button type="submit" class="btn btn-primary" value="Upload">
+          <button type="submit" class="btn btn-primary custom" value="Upload">
             Submit
           </button>
         </form>

@@ -8,3 +8,12 @@
     margin-right: 10px;
   }
  
+  .custom {
+    width: 145px ;
+}
+
+  /* @media screen and (max-width: 500px){
+    .container {
+        background-color: red;
+    }
+  } */
