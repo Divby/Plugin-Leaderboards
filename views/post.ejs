@@ -18,8 +18,15 @@
           <button class="btn fa fa-fire" style="color: orange;" type="submit">  <%= post.likes %></button>
         </form>
         <!-- <h3 class="col-3">Likes:</h3> -->
+        <!-- save to favourites -->
+        <form
+        class="col-3"
+        action="/post/savePost/<%= post.id %>?_method=PUT"
+        method="POST">
+        <button class="btn btn-primary fa fa-bookmark"  type="submit">Save to favorites</button>
+      </form>
 
-        <!-- this code is crashing page when user not logged in -->
+        
         <%if(user && post.user == user.id){ %> 
         <form
           action="/post/deletePost/<%= post.id %>?_method=DELETE"
