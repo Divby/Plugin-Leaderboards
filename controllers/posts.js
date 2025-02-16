@@ -29,6 +29,14 @@ module.exports = {
       console.log(err);
     }
   },
+  getSaved: async (req, res) => {
+    try {
+      const posts = await Post.find( { savedBy: req.user._id }).sort({ createdAt: "desc" }).lean();
+      res.render("profile.ejs", { posts: posts });
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
@@ -109,6 +117,41 @@ module.exports = {
         }
       )
       console.log("Likes +1");
+      
+    }
+      if (req.headers.referer.includes("/home")) {
+        return res.redirect("/home");
+      } else {
+        res.redirect(`/post/${req.params.id}`)
+      }
+      
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  savePost: async (req, res) => {
+    try {
+      const post = await Post.findById(req.params.id);
+
+      if (post.savedBy.includes(req.user._id)) {
+
+        await Post.findByIdAndUpdate(
+          req.params.id,
+          {
+            $pull: {savedBy: req.user._id}
+          }
+        )
+        console.log("save removed");
+       
+      } else {
+
+      await Post.findByIdAndUpdate(
+        req.params.id,
+        {
+          $push: {savedBy: req.user._id}
+        }
+      )
+      console.log("Saved");
       
     }
       if (req.headers.referer.includes("/home")) {

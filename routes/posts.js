@@ -11,6 +11,8 @@ router.post("/createPost", postsController.createPost);
 
 router.put("/likePost/:id", ensureAuth, postsController.likePost);
 
+router.put("/savePost/:id", ensureAuth, postsController.savePost);
+
 router.delete("/deletePost/:id", postsController.deletePost);
 
 module.exports = router;

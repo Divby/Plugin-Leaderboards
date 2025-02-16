@@ -9,6 +9,22 @@
       </div>
 
       <div class="mt-5">
+        <h2>Saved Plugins</h2>
+        <ul class="list-unstyled">
+          <% (posts.savedBy)
+          for(var i=0; i<posts.length; i++) {
+            %>
+            <li class="mb-4 d-flex align-items-center justify-content-between"> 
+              <!-- plugin heading -->
+              <a href="/post/<%= posts[i]._id%>">
+                <h2><%= posts[i].plugin %></h2>
+              </a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+
+      <div class="mt-5">
         <% if (error_msg && error_msg.length > 0) { %>
         <div class="alert alert-danger"><%= error_msg %></div>
         <% } %> <% if (success_msg && success_msg.length > 0) { %>
