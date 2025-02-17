@@ -7,7 +7,7 @@ const Comment = require("../models/Comment");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find({ savedBy: req.user._id }).sort({ createdAt: "desc" }).lean();
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -142,6 +142,7 @@ module.exports = {
           }
         )
         console.log("save removed");
+        req.flash('success_msg', 'Removed from saved plugins.');
        
       } else {
 
@@ -152,6 +153,7 @@ module.exports = {
         }
       )
       console.log("Saved");
+      req.flash('success_msg', 'Added to saved plugins.');
       
     }
       if (req.headers.referer.includes("/home")) {

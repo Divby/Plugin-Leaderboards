@@ -43,6 +43,14 @@
       </div>
     </div>
 
+    <div class="mt-5">
+      <% if (error_msg && error_msg.length > 0) { %>
+      <div class="alert alert-danger"><%= error_msg %></div>
+      <% } %> <% if (success_msg && success_msg.length > 0) { %>
+      <div class="alert alert-success text-center"><%= success_msg %></div>
+      <% } %>
+    </div>
+
 
     <!-- loop to display comments -->
      <div class="row justify-content-between">
